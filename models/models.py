@@ -1,11 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import sys
+sys.path.append("..")
 from app import app
 
 db = SQLAlchemy(app)
 
 class Student(db.Model):
-    user_name = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(
         db.String(120), unique=True, nullable=False,
         primary_key=True)
@@ -26,26 +27,26 @@ class Student(db.Model):
     degree_type = db.Column(db.String(50), unique=False, nullable=False)
     domestic = db.Column(db.Boolean, unique=False, nullable=False)
     full_time = db.Column(db.Boolean, unique=False, nullable=False)
-    appointments = db.relationship('Request', backref='student', lazy=True)
+    appointments = db.relationship('Appointment', backref='student', lazy=True)
     emerg_contact = db.relationship('EmergContact', backref='student', lazy=True)    
 
     def __repr__(self):
         return '<Student %r>' % self.email
 
 
-class Request(db.Model):
-    id = db.Column(db.Integer, unique=True, nullable=False)
+class Appointment(db.Model):
+    id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
     student_email = db.Column(db.String(120), db.ForeignKey('student.email'), nullable = False)
     request_date = db.Column(db.DateTime, nullable=False)
     appointment_date = db.Column(db.DateTime, nullable=False)
     description = db.Column(db.String(2000), nullable=False)
     
     def __repr__(self):
-        return '<Request %r>' % self.id
+        return '<Appointment %r>' % self.id
 
 
 class EmergContact(db.Model):
-    student_email = db.Column(db.String(120), db.ForeignKey('student.email'), nullable = False)
+    student_email = db.Column(db.String(120), db.ForeignKey('student.email'), nullable = False, primary_key=True)
     full_name = db.Column(db.String(200), nullable=False)
     relationship = db.Column(db.String(30), nullable=False)
     phone = db.Column(db.String(10), nullable=False)
@@ -55,7 +56,9 @@ class EmergContact(db.Model):
     postal_code = db.Column(db.String(6), nullable=False)
     country = db.Column(db.String(50), nullable=False)
 
-
+def init_test():
+    db.drop_all()
+    db.create_all()
 
 def create_user(user):
     
@@ -71,7 +74,6 @@ def create_user(user):
         ohip=user["ohip"],
         sex=user["sex"],
         province=user["province"],
-        postal_code=user["postal_code"],
         perm_addr=user["perm_addr"],
         faculty=user["faculty"],
         program=user["program"],
@@ -80,13 +82,34 @@ def create_user(user):
         domestic=user["domestic"],
         full_time=user["full_time"]
         )
-    
-    # add it to the current database session
-    db.session.add(user)
-    # actually save the user object
-    db.session.commit()
 
-    return
+    # add it to the current database session if it exists
+    if (user is not None):
+        db.session.add(user)
+        # commit the change
+        db.session.commit()
+        return user
+
+    else:
+        return None
+    
 
 def login(email, password):
-    return
+    '''
+    Check login information
+    Parameters:
+        email (string)
+        password (string)
+    
+    Returns:
+        user object if successful, returns none o/w
+    '''
+    if((len(email) == 0) or (len(password) == 0)):
+        return False
+    
+    valids = Student.query.filter_by(email=email, password=password).all()
+
+    if len(valids) != 1:
+        return None
+
+    return valids[0]

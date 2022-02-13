@@ -24,3 +24,20 @@ hs_err_pid*
 
 #venv
 venv/
+pyvenv.cfg
+scripts/
+lib/
+include/
+
+#db.sqlite
+db.sqlite
+
+#pytest cache and logs
+test/*
+!test/backend_test.py
+
+#pycache
+**/__pycache__
+
+
+
