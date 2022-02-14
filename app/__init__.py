@@ -2,6 +2,7 @@
 an init file is required for this folder to be considered as a module
 '''
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 
@@ -22,3 +23,11 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '69cae04b04756f65eabcd2c5a11c8c24'
+
+db = SQLAlchemy(app)
+
+from app.core import core
+from app.auth import auth
+
+app.register_blueprint(core)
+app.register_blueprint(auth)

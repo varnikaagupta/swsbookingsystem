@@ -1,10 +1,6 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 import sys
 sys.path.append("..")
-from app import app
-
-db = SQLAlchemy(app)
+from app import app,db
 
 class Student(db.Model):
     email = db.Column(
@@ -28,7 +24,7 @@ class Student(db.Model):
     domestic = db.Column(db.Boolean, unique=False, nullable=False)
     full_time = db.Column(db.Boolean, unique=False, nullable=False)
     appointments = db.relationship('Appointment', backref='student', lazy=True)
-    emerg_contact = db.relationship('EmergContact', backref='student', lazy=True)    
+    emerg_contact = db.relationship('EmergContact', backref='student', lazy=True)
 
     def __repr__(self):
         return '<Student %r>' % self.email
@@ -40,7 +36,7 @@ class Appointment(db.Model):
     request_date = db.Column(db.DateTime, nullable=False)
     appointment_date = db.Column(db.DateTime, nullable=False)
     description = db.Column(db.String(2000), nullable=False)
-    
+
     def __repr__(self):
         return '<Appointment %r>' % self.id
 
@@ -61,7 +57,7 @@ def init_test():
     db.create_all()
 
 def create_user(user):
-    
+
     user = Student(
         email=user["email"],
         password=user["password"],
@@ -92,7 +88,7 @@ def create_user(user):
 
     else:
         return None
-    
+
 
 def login(email, password):
     '''
@@ -100,13 +96,13 @@ def login(email, password):
     Parameters:
         email (string)
         password (string)
-    
+
     Returns:
         user object if successful, returns none o/w
     '''
     if((len(email) == 0) or (len(password) == 0)):
         return False
-    
+
     valids = Student.query.filter_by(email=email, password=password).all()
 
     if len(valids) != 1:
