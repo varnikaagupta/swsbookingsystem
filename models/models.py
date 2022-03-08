@@ -1,6 +1,9 @@
 import sys
+from flask_sqlalchemy import SQLAlchemy
 sys.path.append("..")
-from app import app,db
+from server import app
+
+db = SQLAlchemy(app)
 
 class Student(db.Model):
     email = db.Column(
