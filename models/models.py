@@ -1,14 +1,17 @@
 import sys
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 sys.path.append("..")
 from server import app
 
 db = SQLAlchemy(app)
 
-class Student(db.Model):
-    email = db.Column(
-        db.String(120), unique=True, nullable=False,
-        primary_key=True)
+class Student(db.Model, UserMixin):
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False,)
+    username = db.Column(db.String(120), nullable=False)
     password = db.Column(db.String(120), nullable=False)
     first_name = db.Column(db.String(80), nullable=False)
     last_name = db.Column(db.String(80), nullable=False)
@@ -31,6 +34,12 @@ class Student(db.Model):
 
     def __repr__(self):
         return '<Student %r>' % self.email
+
+    def set_password(self,password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self,password):
+        return check_password_hash(self.password_hash,password)
 
 
 class Appointment(db.Model):
@@ -63,6 +72,7 @@ def create_user(user):
 
     user = Student(
         email=user["email"],
+        username=user["username"],
         password=user["password"],
         first_name=user["first_name"],
         last_name=user["last_name"],

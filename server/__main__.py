@@ -1,6 +1,5 @@
 from server import app
-from server.auth import *
-from server.core import *
+from server.routing import *
 from server.forms import *
 
 """
@@ -11,4 +10,3 @@ FLASK_PORT = 8081
 
 if __name__ == "__main__":
     app.run(debug=True, port=FLASK_PORT, host='0.0.0.0')
-
