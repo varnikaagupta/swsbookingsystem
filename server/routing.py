@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect,url_for
 from flask_login import current_user, login_user, logout_user, login_required
 from models.models import Student,db
-from server import app
 import os
+from server import app
 
 package_dir = os.path.dirname(
     os.path.abspath(__file__)

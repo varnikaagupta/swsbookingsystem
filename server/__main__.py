@@ -1,6 +1,5 @@
 from server import app
 from server.routing import *
-from server.forms import *
 
 """
 This file runs the server at a given port
