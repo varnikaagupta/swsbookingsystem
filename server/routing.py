@@ -1,5 +1,5 @@
 from flask import render_template,request,redirect,url_for
-from flask_login import current_user, login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user, login_required, LoginManager
 from models.models import Student,db
 import os
 from server import app
@@ -7,6 +7,14 @@ from server import app
 package_dir = os.path.dirname(
     os.path.abspath(__file__)
 )
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Student.query.get(int(user_id))
 
 @app.route('/')
 def index():
