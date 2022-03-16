@@ -1,6 +1,6 @@
 from flask import render_template,request,redirect,url_for
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
-from models.models import Student,db
+from models.models import Student,db,init
 import os
 from server import app
 
@@ -23,16 +23,18 @@ def index():
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for(index))
+        return redirect('/')
 
     if request.method == 'POST':
         username = request.form['Username']
+        print(username)
         user = Student.query.filter_by(username = username).first()
-        if user is not None and user.check_password(request.form['password']):
+        print(user.password)
+        if user is not None and user.password == request.form['password']:
             login_user(user)
-            return redirect(url_for(index))
+            return redirect('/')
 
-    return render_template('login.html')
+    return render_template('login.html'), 404
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -47,8 +49,7 @@ def register():
         if Student.query.filter_by(email=email).first():
             return ('Email already exists')
 
-        user = Student(email=email, username=username)
-        user.set_password(password)
+        user = Student(email=email, username=username, password=password)
         db.session.add(user)
         db.session.commit()
         return redirect('/login')
