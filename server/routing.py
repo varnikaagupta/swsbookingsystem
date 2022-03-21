@@ -39,7 +39,7 @@ def login():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for(index))
+        return redirect('/')
 
     if request.method == 'POST':
         email = request.form['email']
