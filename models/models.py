@@ -1,31 +1,34 @@
 import sys
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 sys.path.append("..")
 from server import app
 
 db = SQLAlchemy(app)
 
-class Student(db.Model):
-    email = db.Column(
-        db.String(120), unique=True, nullable=False,
-        primary_key=True)
+class Student(db.Model, UserMixin):
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False,)
+    username = db.Column(db.String(120), nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    first_name = db.Column(db.String(80), nullable=False)
-    last_name = db.Column(db.String(80), nullable=False)
-    address = db.Column(db.String(200), unique=False, nullable=False)
-    postal_code = db.Column(db.String(6), unique=False, nullable=False)
-    date_of_birth = db.Column(db.DateTime, unique=False, nullable=False)
-    student_no = db.Column(db.String(8), unique=True, nullable=False)
-    ohip = db.Column(db.String(12), unique=True, nullable=False)
-    sex = db.Column(db.String(1), unique=False, nullable=False)
-    province = db.Column(db.String(2), unique=False, nullable=False)
-    perm_addr = db.Column(db.String(200), unique=False, nullable=False)
-    faculty = db.Column(db.String(50), unique=False, nullable=False)
-    program = db.Column(db.String(50), unique=False, nullable=False)
-    year = db.Column(db.String(1), unique=False, nullable=False)
-    degree_type = db.Column(db.String(50), unique=False, nullable=False)
-    domestic = db.Column(db.Boolean, unique=False, nullable=False)
-    full_time = db.Column(db.Boolean, unique=False, nullable=False)
+    first_name = db.Column(db.String(80))
+    last_name = db.Column(db.String(80))
+    address = db.Column(db.String(200), unique=False)
+    postal_code = db.Column(db.String(6), unique=False)
+    date_of_birth = db.Column(db.DateTime, unique=False)
+    student_no = db.Column(db.String(8), unique=True)
+    ohip = db.Column(db.String(12), unique=True)
+    sex = db.Column(db.String(1), unique=False)
+    province = db.Column(db.String(2), unique=False)
+    perm_addr = db.Column(db.String(200), unique=False)
+    faculty = db.Column(db.String(50), unique=False)
+    program = db.Column(db.String(50), unique=False)
+    year = db.Column(db.String(1), unique=False)
+    degree_type = db.Column(db.String(50), unique=False)
+    domestic = db.Column(db.Boolean, unique=False)
+    full_time = db.Column(db.Boolean, unique=False)
     appointments = db.relationship('Appointment', backref='student', lazy=True)
     emerg_contact = db.relationship('EmergContact', backref='student', lazy=True)
 
@@ -55,7 +58,7 @@ class EmergContact(db.Model):
     postal_code = db.Column(db.String(6), nullable=False)
     country = db.Column(db.String(50), nullable=False)
 
-def init_test():
+def init():
     db.drop_all()
     db.create_all()
 
@@ -63,6 +66,7 @@ def create_user(user):
 
     user = Student(
         email=user["email"],
+        username=user["username"],
         password=user["password"],
         first_name=user["first_name"],
         last_name=user["last_name"],
@@ -112,3 +116,4 @@ def login(email, password):
         return None
 
     return valids[0]
+

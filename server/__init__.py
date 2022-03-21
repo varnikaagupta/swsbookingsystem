@@ -1,7 +1,6 @@
 '''
 an init file is required for this folder to be considered as a module
 '''
-from tempfile import template
 from flask import Flask
 import os
 
@@ -16,5 +15,5 @@ if db_string:
     app.config['SQLALCHEMY_DATABASE_URI'] = db_string
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../db.sqlite'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = '69cae04b04756f65eabcd2c5a11c8c24'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = '69cae04b04756f65eabcd2c5a11c8c24'
