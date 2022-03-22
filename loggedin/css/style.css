@@ -26,7 +26,13 @@ body {
   padding-top: 175px;
   padding-left: 200px;
   padding-right: 200px;
-  padding-bottom: 50px;
+  padding-bottom: 10px;
+}
+
+.form {
+  font-weight: 500;
+  padding-left: 200px;
+  padding-right: 200px;
 }
 
 p {
