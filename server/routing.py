@@ -40,7 +40,7 @@ def login():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for(index))
+        return redirect('/')
 
     if request.method == 'POST':
         email = request.form['email']
@@ -66,7 +66,13 @@ def logout():
 def profile():
     return render_template('profile.html')
 
-@app.route('/booking')
+@app.route('/booking', methods=['GET'])
 @login_required
 def booking():
+
+    return render_template('booking.html')
+
+@app.route('/booking', methods=['POST'])
+def booking_post():
+
     return render_template('booking.html')

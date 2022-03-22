@@ -2,6 +2,7 @@ import sys
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+import datetime
 sys.path.append("..")
 from server import app
 
@@ -37,9 +38,7 @@ class Student(db.Model, UserMixin):
 
 
 class Appointment(db.Model):
-    id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
-    student_email = db.Column(db.String(120), db.ForeignKey('student.email'), nullable = False)
-    request_date = db.Column(db.DateTime, nullable=False)
+    student_email = db.Column(db.String(120), db.ForeignKey('student.email'), primary_key=True, nullable = False)
     appointment_date = db.Column(db.DateTime, nullable=False)
     description = db.Column(db.String(2000), nullable=False)
 
@@ -57,6 +56,7 @@ class EmergContact(db.Model):
     province = db.Column(db.String(2), nullable=False)
     postal_code = db.Column(db.String(6), nullable=False)
     country = db.Column(db.String(50), nullable=False)
+
 
 def init():
     db.drop_all()
@@ -117,3 +117,17 @@ def login(email, password):
 
     return valids[0]
 
+def createMockAppointments():
+    init()
+    user = Student(username='mockUser', password='test123456@1', email='mock@test.com')
+    db.session.add(user)
+    for i in range(9, 14):
+        newAppointment = Appointment(student_email='mock@test.com',\
+             appointment_date=datetime.datetime(2022, 3, 29, i, 30),\
+             description='testing description')
+        db.session.add(newAppointment)
+    
+    db.session.commit()
+
+    return newAppointment
+    
