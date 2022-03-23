@@ -77,7 +77,6 @@ def booking():
 
 @app.route('/booking', methods=['POST'])
 def booking_check():
-    print('POST CALLED')
     times_list = []
     date_str = request.form['date']
     date_obj = datetime.datetime.strptime(date_str, '%d/%m/%Y')
@@ -90,4 +89,4 @@ def booking_check():
 
     print(times_list)
 
-    return render_template('booking.html', times_list=times_list)
+    return render_template('datetimes.html', times_list=times_list)
