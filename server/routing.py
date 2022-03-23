@@ -1,8 +1,12 @@
 from flask import render_template,request,redirect,url_for
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
-from models.models import Student,db,init
+from models.models import Appointment, Student, createMockAppointments,db,init
+import datetime
+from datetime import time
 import os
 from server import app
+
+createMockAppointments()
 
 package_dir = os.path.dirname(
     os.path.abspath(__file__)
@@ -69,10 +73,21 @@ def profile():
 @app.route('/booking', methods=['GET'])
 @login_required
 def booking():
-
     return render_template('booking.html')
 
 @app.route('/booking', methods=['POST'])
-def booking_post():
+def booking_check():
+    print('POST CALLED')
+    times_list = []
+    date_str = request.form['date']
+    date_obj = datetime.datetime.strptime(date_str, '%d/%m/%Y')
+    
+    for i in range(9, 19):
+        date_obj = date_obj.replace(hour=i)
+        if(Appointment.query.filter_by(appointment_date=date_obj).first() is None):
+            time = date_obj.strftime('%H:%M')
+            times_list.append({'start_time':time})
 
-    return render_template('booking.html')
+    print(times_list)
+
+    return render_template('booking.html', times_list=times_list)

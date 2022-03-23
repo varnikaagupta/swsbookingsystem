@@ -1,3 +1,4 @@
+from enum import unique
 import sys
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
@@ -38,8 +39,9 @@ class Student(db.Model, UserMixin):
 
 
 class Appointment(db.Model):
-    student_email = db.Column(db.String(120), db.ForeignKey('student.email'), primary_key=True, nullable = False)
-    appointment_date = db.Column(db.DateTime, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    student_email = db.Column(db.String(120), db.ForeignKey('student.email'), nullable = False)
+    appointment_date = db.Column(db.DateTime, nullable=False, unique=True)
     description = db.Column(db.String(2000), nullable=False)
 
     def __repr__(self):
@@ -121,13 +123,18 @@ def createMockAppointments():
     init()
     user = Student(username='mockUser', password='test123456@1', email='mock@test.com')
     db.session.add(user)
+    
     for i in range(9, 14):
-        newAppointment = Appointment(student_email='mock@test.com',\
-             appointment_date=datetime.datetime(2022, 3, 29, i, 30),\
+        appointment_date=datetime.datetime(2022, 3, 29, i, 0)
+        newAppointment = Appointment(id=i, student_email='mock@test.com',\
+             appointment_date=appointment_date,\
              description='testing description')
+        print(appointment_date)
         db.session.add(newAppointment)
     
     db.session.commit()
 
-    return newAppointment
+    
+
+    return
     
