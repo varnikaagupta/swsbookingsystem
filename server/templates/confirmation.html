@@ -148,15 +148,9 @@
       </div>
     </div>
 
-    <div class="main-page" style="padding-top: 200px;">
-      <form action="/confirmation">
-          {% for item in times_list %}
-              <input type="radio">
-              <label>{{ item.start_time }}</label><br>
-          {% endfor %}
-          <br>
-          <input type="submit" value="submit">
-      </form>
+    <div class="main-page" style="padding-top:200px;">
+        <h1>Tentative Appointment Confirmation</h1>
+        <p>Your appointment has been tenatively scheduled for the following time, pending admin approval. You will receive an email soon to confirm this appointment time.</p>
     </div>
 
     <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
