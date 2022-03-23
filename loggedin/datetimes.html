@@ -1,37 +1,26 @@
 <!doctype html>
-<html lang="en">
-
+<html lang="en" data-framework="javascript">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
     
-    <link href="{{ url_for('static', filename='https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
 
-    <link href="{{ url_for('static', filename='fonts/icomoon/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
 
-    <link href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" rel="stylesheet">
-
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
-
-    <!-- <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap"> -->
-
-    <!-- <link rel="stylesheet" href="fonts/icomoon/style.css">
-
-    <link rel="stylesheet" href="css/owl.carousel.min.css"> -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
 
     <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     
     <!-- Style -->
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="css/style.css">
 
 
     <title>Student Wellness Services | Queen's University</title>
   </head>
-  <body>
+  <body style="background-image: url('images/hero_1.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
 
     <div class="site-mobile-menu site-navbar-target">
       <div class="site-mobile-menu-header">
@@ -150,8 +139,8 @@
                       </ul>
                     </li>
                     <li><a href="#contact-section" class="nav-link">Contact</a></li>
-                    <li onclick="location.href='register'"><a href="#registration-section" class="nav-link">Register</a></li>
-                    <li onclick="location.href='login'"><a href="#login-section" class="nav-link">Login</a></li>
+                    <li onclick="location.href='register.html'"><a href="#registration-section" class="nav-link">Register</a></li>
+                    <li onclick="location.href='login.html'"><a href="#login-section" class="nav-link">Login</a></li>
                   </ul>
                 </div>
               </nav>
@@ -160,111 +149,21 @@
         </div>
       </div>
     </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <script src="js/calendar.js"></script>
     
-    
-    <div class="hero" style="background-image: url_for('static', filename='images/hero_1.jpg');"></div>
-    <!-- <div class="hero" style="background-image: url('images/hero_1.jpg');"></div> -->
 
-    <div class="main-page">
-      <h1>Welcome to Student Wellness Services at Queen's University</h1>
-      <p> </p>
-      <h5>Student Wellness Services (SWS) supports the personal, academic, and social health development of students at Queen's University by providing a range of programs and services. We aim to offer a welcoming, confidential, and integrated service that is responsive to your health and wellness needs.</h5>      
-    </div>
-
-    <div class="card-section">
-      <div class="row">
-
-        <div class="column">
-          <div class="card">
-            <img src="{{ url_for('static', filename='images/gethelpnow.png') }}"></img>
-            <!-- <img src="images/gethelpnow.png" alt="Avatar" style="width:100%"> -->
-            <div class="container">
-              <h4><b>Get Help Now</b></h4> 
-              <p>Urgent, emergency, and 24/7 resources.</p>
-              <a href="#" class="nav-link">Connect Now ></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="card">
-            <img src="{{ url_for('static', filename='images/bookedapointments.png') }}"></img>
-            <!-- <img src="images/bookedapointments.png" alt="Avatar" style="width:100%"> -->
-            <div class="container">
-              <h4><b>Booked Appointments & Same-Day Clinic</b></h4>
-              <p>Professional health and wellness services.</p>
-              <a href="#" class="nav-link">Medical, Mental Health, & Healthy Lifestyle ></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="card">
-            <img src="{{ url_for('static', filename='images/accessibility.png') }}"></img>
-            <!-- <img src="images/accessibility.png" alt="Avatar" style="width:100%"> -->
-            <div class="container">
-              <h4><b>Accessibility Registration</b></h4>
-              <p>Supports and accomodations for students with disabilities.</p>
-              <a href="#" class="nav-link">Register With QSAS ></a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="row">
-
-        <div class="column">
-          <div class="card">
-            <img src="{{ url_for('static', filename='images/afterhours.png') }}"></img>
-            <!-- <img src="images/afterhours.png" alt="Avatar" style="width:100%"> -->
-            <div class="container">
-              <h4><b>After-Hours Supports</b></h4>
-              <p>For evenings and weekends.</p>
-              <a href="#" class="nav-link">See What's Available ></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="card">
-            <img src="{{ url_for('static', filename='images/circumstances.png') }}"></img>
-            <!-- <img src="images/circumstances.png" alt="Avatar" style="width:100%"> -->
-            <div class="container">
-              <h4><b>Extenuating Ciurcumstances</b></h4>
-              <p>What to do if you're unwell and it's impacting your academics.</p>
-              <p><a href="#" class="nav-link">Get Information ></a></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="card">
-            <img src="{{ url_for('static', filename='images/insurance.png') }}"></img>
-            <!-- <img src="images/insurance.png" alt="Avatar" style="width:100%"> -->
-            <div class="container">
-              <h4><b>Health Insurance</b></h4>
-              <p>For Canadian, international, and exchange students.</p>
-              <a href="#" class="nav-link">More Information ></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-    
-    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/jquery.sticky.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
-    <!-- <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
-    <script src="js/main.js"></script> -->
+    <script src="js/main.js"></script>
   </body>
-
 </html>
