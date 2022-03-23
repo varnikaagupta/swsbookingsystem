@@ -149,9 +149,9 @@
     </div>
 
     <div class="main-page" style="padding-top: 200px;">
-      <form action="/confirmation">
+      <form action="/confirmation" method="post">
           {% for item in times_list %}
-              <input type="radio">
+              <input type="radio" name="bookDate" value="{{ item }}">
               <label>{{ item.start_time }}</label><br>
           {% endfor %}
           <br>

@@ -150,7 +150,7 @@
 
     <div class="main-page" style="padding-top:200px;">
         <h1>Tentative Appointment Confirmation</h1>
-        <p>Your appointment has been tenatively scheduled for the following time, pending admin approval. You will receive an email soon to confirm this appointment time.</p>
+        <p>Your appointment has been tenatively scheduled for the following time: {{ date }} at {{ start_time }}, pending admin approval. You will receive an email soon to confirm this appointment time.</p>
     </div>
 
     <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>

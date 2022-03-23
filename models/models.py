@@ -39,10 +39,10 @@ class Student(db.Model, UserMixin):
 
 
 class Appointment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     student_email = db.Column(db.String(120), db.ForeignKey('student.email'), nullable = False)
     appointment_date = db.Column(db.DateTime, nullable=False, unique=True)
-    description = db.Column(db.String(2000), nullable=False)
+    description = db.Column(db.String(2000), nullable=True)
 
     def __repr__(self):
         return '<Appointment %r>' % self.id
@@ -126,15 +126,30 @@ def createMockAppointments():
     
     for i in range(9, 14):
         appointment_date=datetime.datetime(2022, 3, 29, i, 0)
-        newAppointment = Appointment(id=i, student_email='mock@test.com',\
+        newAppointment = Appointment(student_email='mock@test.com',\
              appointment_date=appointment_date,\
              description='testing description')
         print(appointment_date)
         db.session.add(newAppointment)
     
     db.session.commit()
-
-    
-
     return
+    
+def bookAppointment(user, date):
+    '''
+    books a new appointment using the user object and date object.
+    Returns appointment object if successful
+    otherwise return None
+    
+    '''
+    if(Appointment.query.filter_by(appointment_date=date).first() is None):
+        new_appointment = Appointment(student_email=user.email, appointment_date=date)
+        db.session.add(new_appointment)
+        db.session.commit()
+
+        return new_appointment
+
+    else:
+
+        return None
     

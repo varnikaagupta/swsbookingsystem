@@ -1,8 +1,9 @@
 from flask import render_template,request,redirect,url_for
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
-from models.models import Appointment, Student, createMockAppointments,db,init
+from models.models import Appointment, Student, createMockAppointments,db,init,bookAppointment
 import datetime
 from datetime import time
+import json
 import os
 from server import app
 
@@ -85,8 +86,30 @@ def booking_check():
         date_obj = date_obj.replace(hour=i)
         if(Appointment.query.filter_by(appointment_date=date_obj).first() is None):
             time = date_obj.strftime('%H:%M')
-            times_list.append({'start_time':time})
+            date = date_obj.strftime('%d/%m/%Y')
+            times_list.append({'start_time':time, 'date':date})
 
+    print('times_list \n')
     print(times_list)
 
     return render_template('datetimes.html', times_list=times_list)
+
+@app.route('/confirmation', methods=['POST'])
+def confirmation():
+    date = request.form['bookDate']
+    date = date.replace("\'", "\"")
+    print(date)
+    date = json.loads(date)
+    print('DATE DICTIONARY OBJECT: ')
+    print(type(date))
+    print(date)
+    date_str = date['date'] + ' ' + date['start_time']
+
+    date_obj = datetime.datetime.strptime(date_str, '%d/%m/%Y %H:%M')
+    print('date_str: \n')
+    print(date_str)
+
+    print('date_obj: ')
+    print(date_obj)
+
+    return render_template('confirmation.html', msg='Success!', date=date['date'], start_time=date['start_time'])
