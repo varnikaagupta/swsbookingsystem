@@ -1,4 +1,5 @@
-from flask import render_template,request,redirect,url_for
+from flask import render_template,request,redirect,url_for,session
+# to be added to init.py
 from flask_login import current_user, login_user, logout_user, login_required, LoginManager
 from models.models import Appointment, Student, createMockAppointments,db,init,bookAppointment
 import datetime
@@ -26,6 +27,8 @@ def load_user(user_id):
 def index():
   return render_template('index.html')
 
+
+
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
@@ -38,6 +41,7 @@ def login():
         print(user.password)
         if user is not None and user.password == request.form['password']:
             login_user(user)
+            session['logged_in'] = user.username
             return redirect('/')
 
     return render_template('login.html'), 404
@@ -63,8 +67,10 @@ def register():
 
 @app.route('/logout')
 def logout():
+    if 'logged_in' in session:
+        session.pop('logged_in', None)
     logout_user()
-    return redirect(url_for(index))
+    return redirect('/')
 
 @app.route('/profile')
 @login_required
@@ -112,4 +118,14 @@ def confirmation():
     print('date_obj: ')
     print(date_obj)
 
-    return render_template('confirmation.html', msg='Success!', date=date['date'], start_time=date['start_time'])
+
+    username = session['logged_in']
+    user = Student.query.filter_by(username = username).first()
+
+    if(user is not None):
+        success = bookAppointment(user, date_obj)
+        return render_template('confirmation.html', msg='Success!', date=date['date'], start_time=date['start_time'])
+    else:
+        return render_template('/', msg='Error! Could not book appointment')
+
+
