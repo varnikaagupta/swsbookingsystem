@@ -1,44 +1,23 @@
 <!doctype html>
 <html lang="en">
+
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-
-    <!-- <link rel="stylesheet" href="css/register_style.css"> -->
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <!-- <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet"> -->
-
-    <!-- <link rel="stylesheet" href="fonts/icomoon/style.css"> -->
-
-    <!-- <link rel="stylesheet" href="css/owl.carousel.min.css"> -->
-
-    <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-
-    <!-- Style -->
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
-
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Styling in CSS and Bootstrap -->
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-    
     <link href="{{ url_for('static', filename='https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap') }}" rel="stylesheet">
-
     <link href="{{ url_for('static', filename='fonts/icomoon/style.css') }}" rel="stylesheet">
-
     <link href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" rel="stylesheet">
-
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
-
     <link href="{{ url_for('static', filename='css/register_style.css') }}" rel="stylesheet">
 
     <title>Student Wellness Services | Queen's University</title>
   </head>
-  <body>
 
+  <body style="background-image: url({{ url_for('static', filename='images/hero_1.jpg') }}); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
 
     <div class="site-mobile-menu site-navbar-target">
       <div class="site-mobile-menu-header">
@@ -49,11 +28,10 @@
       <div class="site-mobile-menu-body"></div>
     </div>
     
-    
     <div class="site-navbar-wrap">
       <div class="site-navbar-top">
         <div class="container py-3">
-          <div class="row align-items-center">
+          <div class="row align-items-center" style="padding-bottom:0px;">
             <div class="col-6">
               <div class="d-flex mr-auto">
                 <a href="#" class="d-flex align-items-center mr-4">
@@ -81,17 +59,22 @@
 
       <div class="site-navbar site-navbar-target js-sticky-header">
         <div class="container">
-          <div class="row align-items-center">
+          <div class="row align-items-center" style="padding-bottom:0px;">
             <div class="col-2">
-              <h1 class="my-0 site-logo"><a href="/">Student Wellness Services</a></h1>
+              <h1 class="my-0 site-logo"><a href="index.html">Student Wellness Services</a></h1>
             </div>
             <div class="col-10">
               <nav class="site-navigation text-right" role="navigation">
                 <div class="container">
-                  <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+                  <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3">
+                    <a href="#" class="site-menu-toggle js-menu-toggle text-white">
+                      <span class="icon-menu h3"></span>
+                    </a>
+                  </div>
 
                   <ul class="site-menu main-menu js-clone-nav d-none d-lg-block">
-                    <li class="active" onclick="location.href='/'"><a href="#home-section" class="nav-link">Home</a></li>
+                    <li class="active" onclick="location.href='index.html'">
+                      <a href="#home-section" class="nav-link">Home</a></li>
                     <li class="has-children">
                       <a href="#" class="nav-link">Services & Information</a>
                       <ul class="dropdown arrow-top">
@@ -168,8 +151,9 @@
       </div>
     </div>
 
-    <div class="main-w3layouts">
-      <h1>Student Wellness Services Registration</h1>
+    <!-- Registration Section -->
+    <div class="main-w3layouts" style="padding-top:150px;">
+      <h1 style="font-weight: 500;">Student Wellness Services Registration</h1>
       <div class="main-agileinfo">
         <div class="agileits-top">
           <form action="#" method="post">
@@ -190,17 +174,11 @@
         </div>
       </div>
 
-
-    
     <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.sticky.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <!-- <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.sticky.js"></script>
-    <script src="js/main.js"></script> -->
+
   </body>
 </html>
