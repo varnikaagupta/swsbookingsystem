@@ -140,8 +140,8 @@
                       </ul>
                     </li>
                     <li><a href="#contact-section" class="nav-link">Contact</a></li>
-                    <li onclick="location.href='register'"><a href="#registration-section" class="nav-link">Register</a></li>
-                    <li onclick="location.href='login'"><a href="#login-section" class="nav-link">Login</a></li>
+                    <li onclick="location.href='profile'"><a href="#profile-section" class="nav-link">Profile</a></li>
+                    <li onclick="location.href='logout'"><a href="#logout-section" class="nav-link">Log Out</a>
                   </ul>
                 </div>
               </nav>
@@ -153,6 +153,51 @@
 
     <div class="main-page">
       <h1>Welcome to <br><b>Student Wellness Services at Queen's University</b></h1>
+      <br>
+      <br>
+      <div class="col form-group">
+        <form method="get" action="/booking">
+          <button type="submit" class="btn btn-primary btn-block" id="submit">Book an Appointment</button>
+        </form>
+      <br>
+      </div>
+      <div>
+        <h2 style="text-align:center;">Upcoming Appointments</h2>
+        <br>
+        <div class="row">
+          <div class="calendar col-md-8 offset-md-2">
+              <div>
+                  <div class="card-header bg-primary">
+                      <ul>
+                          <li id="month" class="text-white text-uppercase text-center">
+                          </li>
+                          <li id="year" class="text-white text-uppercase text-center">
+                          </li>
+                      </ul>
+                  </div>
+                  <table class="table calendar table-bordered table-responsive-sm" id="calendar">
+                      <thead>
+                          <tr class="weekdays bg-dark">
+                            <th scope="col" class="text-white text-center">Mo</th>
+                            <th scope="col" class="text-white text-center">Tu</th>
+                            <th scope="col" class="text-white text-center">We</th>
+                            <th scope="col" class="text-white text-center">Th</th>
+                            <th scope="col" class="text-white text-center">Fr</th>
+                            <th scope="col" class="text-white text-center">Sa</th>
+                            <th scope="col" class="text-white text-center">Su</th>
+                          </tr>
+                        </thead>
+                      <tbody class="days bg-light" id="days"></tbody>
+                      <tfoot></tfoot>
+                  </table>
+              </div>
+          </div>
+      </div>
+      </div>
+      <div>
+        <br>
+        <h2><b>Required Documentation</b> for Upcoming Appointments</h2>
+      </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
@@ -160,5 +205,6 @@
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.sticky.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
   </body>
 </html>

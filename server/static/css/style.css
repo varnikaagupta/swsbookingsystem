@@ -22,6 +22,10 @@ body {
     z-index: 1002;
     visibility: visible; }
 
+table {
+  width: 35%;
+}
+
 .booking {
   padding-top: 175px;
   padding-left: 200px;
