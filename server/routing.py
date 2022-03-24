@@ -25,9 +25,10 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-  return render_template('index.html')
-
-
+    login=False
+    if 'logged_in' in session:
+        login=True
+    return render_template('index.html',login=login)
 
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
@@ -87,7 +88,7 @@ def booking_check():
     times_list = []
     date_str = request.form['date']
     date_obj = datetime.datetime.strptime(date_str, '%d/%m/%Y')
-    
+
     for i in range(9, 19):
         date_obj = date_obj.replace(hour=i)
         if(Appointment.query.filter_by(appointment_date=date_obj).first() is None):
@@ -127,5 +128,3 @@ def confirmation():
         return render_template('confirmation.html', msg='Success!', date=date['date'], start_time=date['start_time'])
     else:
         return render_template('/', msg='Error! Could not book appointment')
-
-
