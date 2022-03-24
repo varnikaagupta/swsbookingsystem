@@ -25,10 +25,9 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-    login=False
     if 'logged_in' in session:
-        login=True
-    return render_template('index.html',login=login)
+        return render_template('index_profile.html')
+    return render_template('index.html')
 
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
